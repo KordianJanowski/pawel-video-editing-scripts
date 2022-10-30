@@ -10,7 +10,7 @@ const PasswordAuth: React.FC = () => {
   const { initialValues, handleSubmit, isAuthorized } = usePasswordAuth()
 
   return (
-    <div className='grid w-screen h-screen bg-gradient-to-br from-blue-700 to-indigo-700 place-items-center'>
+    <div className='grid w-screen h-screen bg-gradient-to-br from-indigo-800 to-indigo-900 place-items-center'>
       <div className='grid place-items-center'>
         <p className='text-4xl font-semibold text-white'>Podaj hasło</p>
         <Formik
@@ -29,7 +29,7 @@ const PasswordAuth: React.FC = () => {
             />
             <button
               type="submit"
-              className='px-6 py-2 mx-auto mt-3 text-xl font-semibold text-blue-700 bg-white shadow w-min rounded-xl'
+              className='px-6 py-2 mx-auto mt-3 text-xl font-semibold text-indigo-900 bg-white shadow w-min rounded-xl'
             >
               Sprawdź
             </button>

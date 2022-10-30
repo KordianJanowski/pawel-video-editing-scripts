@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <AuthorizationContextProvider>
       <Layout>
         <Routes>
-            <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Layout>
     </AuthorizationContextProvider>

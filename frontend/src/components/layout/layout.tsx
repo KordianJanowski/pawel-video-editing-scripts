@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../navbar';
 import PasswordAuth from '../password-auth';
 import { useAuthorizationContext } from '../../contexts';
 
@@ -15,12 +14,11 @@ const Layout: React.FC<IProps> = ({ children }) => {
     <>
       {
         isAuthorized ?
-          <div>
-            <Navbar />
+          <div className='flex flex-col min-h-screen text-white bg-gray-800'>
             {children}
           </div>
         :
-        <PasswordAuth />
+          <PasswordAuth />
       }
     </>
   )

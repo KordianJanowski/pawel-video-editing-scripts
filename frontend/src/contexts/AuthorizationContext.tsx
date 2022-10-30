@@ -1,12 +1,13 @@
-import React, { Context, createContext, useContext, useState } from "react";
+import React, { Dispatch , SetStateAction, createContext, useContext, useState } from "react";
 
-// interface IauthorizationContext {
-//   isAuthorized: boolean,
-// }
+interface IauthorizationContext {
+  isAuthorized: boolean,
+  setIsAuthorized: Dispatch<SetStateAction<boolean>>;
+}
 
-export const AuthorizationContext = createContext({
+export const AuthorizationContext = createContext<IauthorizationContext>({
   isAuthorized: false,
-  setIsAuthorized: (newValue:boolean) => console.log(newValue)
+  setIsAuthorized: () => false
 })
 
 export const useAuthorizationContext = () => {

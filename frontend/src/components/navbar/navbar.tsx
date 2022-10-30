@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const Navbar: React.FC = () => {
+interface Iprops {
+  setDisplayScriptAddModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Navbar: React.FC<Iprops> = ({ setDisplayScriptAddModal }) => {
   let isOpen = false
 
   return (
-    <nav className="relative bg-white shadow bg-gradient-to-br from-blue-700 to-indigo-700">
-      <div className="container px-6 py-3 mx-auto md:flex">
+    <nav className="relative bg-white shadow bg-gradient-to-br from-indigo-800 to-indigo-900">
+      <div className="container px-6 py-4 mx-auto md:flex">
           <div className="flex items-center justify-between">
               <div>
                 <Link to='/' className="text-2xl font-bold text-gray-800 transition-colors duration-300 transform dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">PVES</Link>
@@ -28,9 +32,9 @@ const Navbar: React.FC = () => {
               </div>
           </div>
 
-          <div className={`${isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full'} absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white bg-gradient-to-br from-blue-700 to-indigo-700 md:mt-0 md:p-0 md:top-0 md:relative md:opacity-100 md:translate-x-0 md:flex md:items-center md:justify-between`}>
+          <div className={`${isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full'} absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-transparent md:mt-0 md:p-0 md:top-0 md:relative md:opacity-100 md:translate-x-0 md:flex md:items-center md:justify-between`}>
               <div className="flex flex-col px-2 -mx-4 md:flex-row md:mx-10 md:py-0">
-                  <button className="px-2.5 py-2 text-gray-700 duration-100 transform rounded-lg dark:text-gray-200 border border-transparent hover:border-gray-400 md:mx-2">Dodaj skrypt</button>
+                  <button onClick={() => setDisplayScriptAddModal(true)} className="px-2.5 py-2 text-gray-700 duration-100 transform rounded-lg dark:text-gray-200 border border-transparent hover:border-gray-400 md:mx-2">Dodaj skrypt</button>
               </div>
 
               <div className="relative mt-4 md:mt-0">
