@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, AddScriptModal, Loading } from '../components';
+import { useScriptsContext } from '../contexts';
 import useHome from '../hooks/home.hook';
 import { Iscript } from '../types/interfaces';
 
 const Home: React.FC = () => {
-  const { scripts, loading, displayScriptAddModal, setDisplayScriptAddModal } = useHome()
+  const [searchPhrase, setSearchPhrase] = useState<string>('')
+  const { loading, displayScriptAddModal, setDisplayScriptAddModal } = useHome()
+  const { scripts } = useScriptsContext()
 
-  const scriptsMap = scripts.map((script:Iscript) => {
+  const scriptsToMap = searchPhrase.trim() === '' ? scripts : scripts.filter(script => script.title.includes(searchPhrase))
+
+  const scriptsMap = scriptsToMap.map((script:Iscript) => {
     return (
       <button
-        key={script.title}
+        key={script.code}
         onClick={() =>  navigator.clipboard.writeText(script.code)}
-        className="px-20 py-10 mx-5 text-3xl rounded-lg shadow-lg ring ring-opacity-70 hover:ring-opacity-90 ring-white bg-gradient-to-br from-indigo-800 to-indigo-900 hover:to-indigo-800"
+        className="px-20 py-10 mx-5 mt-5 text-3xl shadow-lg ring ring-opacity-70 hover:ring-opacity-90 ring-white bg-gradient-to-br from-indigo-800 to-indigo-900 hover:to-indigo-800"
       >
         {script.title}
       </button>
@@ -22,11 +27,13 @@ const Home: React.FC = () => {
     <>
       <Navbar
         setDisplayScriptAddModal={setDisplayScriptAddModal}
+        setSearchPhrase={setSearchPhrase}
+        searchPhrase={searchPhrase}
       />
-      <div className='flex items-center justify-center pt-10 border-t-4 border-white'>
+      <div className='flex items-center justify-center pt-10'>
         {
           !loading ?
-            <div className='flex'>
+            <div className='flex flex-row-reverse flex-wrap'>
               {scriptsMap}
             </div>
           :

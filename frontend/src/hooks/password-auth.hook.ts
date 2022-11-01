@@ -1,7 +1,6 @@
 import { useAuthorizationContext } from '../contexts';
 import { IpasswordForm } from '../types/interfaces';
 
-let isAuthorized = false
 const usePasswordAuth = () => {
   const { setIsAuthorized } = useAuthorizationContext()
   const initialValues: IpasswordForm = {
@@ -13,7 +12,6 @@ const usePasswordAuth = () => {
   }
 
   return {
-    isAuthorized,
     initialValues,
     handleSubmit
   }
