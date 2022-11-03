@@ -5,8 +5,10 @@ export interface IpasswordForm {
 export interface Iscript {
   code: string
   title: string
+  id?: string
 }
 
-export interface IscriptAttributes {
+export interface IscriptQueryData {
   attributes: Iscript
+  id: string
 }

@@ -18,3 +18,17 @@ export const ADD_SCRIPT = gql`
     }
   }
 `
+
+export const DELETE_SCRIPT = gql`
+  mutation ($scriptId: ID!) {
+    deleteScript(id: $scriptId) {
+      data {
+        id
+        attributes {
+          title,
+          code
+        }
+      }
+    }
+  }
+`
