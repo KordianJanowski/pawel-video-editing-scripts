@@ -23,8 +23,10 @@ const useAddScriptModal = ({ setDisplayScriptAddModal }:Iprops) => {
         scriptCode: values.code
       }
     }).then(res => {
-      const addedScript:Iscript = res.data.createScript.data.attributes
-      console.log(addedScript)
+      const addedScript:Iscript = {
+        ...res.data.createScript.data.attributes,
+        id: res.data.createScript.data.id
+      }
 
       setScripts(scripts => [...scripts, addedScript])
       setDisplayScriptAddModal(false)

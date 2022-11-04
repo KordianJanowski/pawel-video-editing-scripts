@@ -10,6 +10,7 @@ export const ADD_SCRIPT = gql`
       }
     ) {
       data {
+        id
         attributes {
           title,
           code

@@ -10,7 +10,7 @@ const Home: React.FC = () => {
   const { loading, displayScriptAddModal, setDisplayScriptAddModal, deleteScript } = useHome()
   const { scripts } = useScriptsContext()
 
-  const scriptsToMap = searchPhrase.trim() === '' ? scripts : scripts.filter(script => script.title.includes(searchPhrase))
+  const scriptsToMap = searchPhrase.trim() === '' ? scripts : scripts.filter(script => script.title.toLowerCase().includes(searchPhrase.toLowerCase()))
 
   const scriptsMap = scriptsToMap.map((script:Iscript) => {
     return (
