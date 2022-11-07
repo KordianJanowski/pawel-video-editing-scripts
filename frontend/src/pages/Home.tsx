@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, AddScriptModal, Loading } from '../components';
+import { Navbar, AddScriptModal, Loading, ConfirmModal } from '../components';
 import { useScriptsContext } from '../contexts';
 import useHome from '../hooks/home.hook';
 import { Iscript } from '../types/interfaces';
@@ -7,8 +7,17 @@ import { TrashIcon } from '@heroicons/react/24/solid'
 
 const Home: React.FC = () => {
   const [searchPhrase, setSearchPhrase] = useState<string>('')
-  const { loading, displayScriptAddModal, setDisplayScriptAddModal, deleteScript } = useHome()
   const { scripts } = useScriptsContext()
+  const {
+    loading,
+    displayConfirmDeleteModal,
+    setDisplayConfirmDeleteModal,
+    displayScriptAddModal,
+    setDisplayScriptAddModal,
+    setScriptIdToDelete,
+    scriptIdToDelete,
+    deleteScript
+  } = useHome()
 
   const scriptsToMap = searchPhrase.trim() === '' ? scripts : scripts.filter(script => script.title.toLowerCase().includes(searchPhrase.toLowerCase()))
 
@@ -21,7 +30,10 @@ const Home: React.FC = () => {
       >
         {script.title}
         <div className='absolute hidden top-1 right-2 group-hover:block'>
-          <button onClick={() => deleteScript(script.id ?? '')}>
+          <button onClick={() => {
+            setDisplayConfirmDeleteModal(true)
+            setScriptIdToDelete(script.id ?? '')
+          }}>
             <TrashIcon className="w-6 h-6" />
           </button>
         </div>
@@ -48,12 +60,17 @@ const Home: React.FC = () => {
             </div>
         }
       </div>
-      {
-        displayScriptAddModal
-          ? <AddScriptModal
-              setDisplayScriptAddModal={setDisplayScriptAddModal}
-            />
-          : null
+      { displayScriptAddModal
+        ? <AddScriptModal setDisplayScriptAddModal={setDisplayScriptAddModal} />
+        : null
+      }
+      { displayConfirmDeleteModal
+        ? <ConfirmModal
+            deleteScript={deleteScript}
+            setDisplayConfirmDeleteModal={setDisplayConfirmDeleteModal}
+            scriptIdToDelete={scriptIdToDelete}
+          />
+        : null
       }
     </>
   )

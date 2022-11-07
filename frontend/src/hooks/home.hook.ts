@@ -8,6 +8,8 @@ import { DELETE_SCRIPT } from '../api/mutations';
 const useHome = () => {
   const { data, loading } = useQuery(GET_SCRIPTS)
   const [displayScriptAddModal, setDisplayScriptAddModal] = useState<boolean>(false)
+  const [displayConfirmDeleteModal, setDisplayConfirmDeleteModal] = useState<boolean>(false)
+  const [scriptIdToDelete, setScriptIdToDelete] = useState<string>('')
   const { setScripts } = useScriptsContext()
   const [deleteScriptMutation] = useMutation(DELETE_SCRIPT)
 
@@ -37,7 +39,11 @@ const useHome = () => {
     loading,
     displayScriptAddModal,
     setDisplayScriptAddModal,
-    deleteScript
+    setDisplayConfirmDeleteModal,
+    displayConfirmDeleteModal,
+    deleteScript,
+    scriptIdToDelete,
+    setScriptIdToDelete
   }
 }
 
